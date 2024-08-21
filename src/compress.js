@@ -5,7 +5,7 @@ function compressImg(req, res, imgData) {
     const imgFormat = req.params.webp ? 'webp' : 'jpeg';
     imgProc(imgData)
         .grayscale(req.params.grayscale)
-        .toFormat(imgFormat, { quality: req.params.quality, progressive: true, optimizeScans: true })
+        .toFormat(imgFormat, { quality: req.params.quality, progressive: true, optimizeScans: true, chromaSubsampling: '4:4:4', })
         .toBuffer((error, outputBuffer, info) => {
             if (error || !info || res.headersSent) {
                 return redirectFunc(req, res);
